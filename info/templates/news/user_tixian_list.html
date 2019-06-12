@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户中心</title>
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/jquery.pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
+    <script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../../static/news/js/jquery.pagination.min.js"></script>
+</head>
+<body class="inframe_body">
+    <div class="tixian_list">
+        <h3>提现列表</h3>
+    <ul class="article_list">
+        {% for tixian in data.tixian_list %}
+            <li>
+            {% if tixian.status == 0 %}
+                {# 审核通过 #}
+                <a href="javascript:;">{{ tixian.tixian }}</a><em class="pass">已通过</em><span>{{ tixian.create_time }}</span>
+            {% elif tixian.status == 1 %}
+                {# 审核中 #}
+                <a href="javascript:;">{{ tixian.tixian }}</a><em class="review">审核中</em><span>{{ tixian.create_time }}</span>
+            {% else %}
+                {# 审核不通过 #}
+                <a href="javascript:;">{{ tixian.tixian }}</a><em class="nopass">未通过(金币已退还)</em><span>{{ tixian.create_time }}</span>
+                
+            {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+         <div id="pagination" class="page"></div>
+        <script>
+            $(function(){
+                $("#pagination").pagination({
+                    currentPage: {{ data.current_page }},
+                    totalPage: {{ data.total_page }},
+                    callback: function(current) {
+                        window.location.href = '/user/news_list?p=' + current
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

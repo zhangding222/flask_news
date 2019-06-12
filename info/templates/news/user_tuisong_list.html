@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户中心</title>
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/jquery.pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
+    <script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../../static/news/js/jquery.pagination.min.js"></script>
+</head>
+<body class="inframe_body">
+    <div class="tixian_list">
+        <h3>新闻推送</h3>
+    <ul class="article_list">
+        {% for tuisong in data.tuisong_list %}
+            <li>
+            
+                {# 审核通过 #}
+                <a href="http://127.0.0.1:5000/news/{{ tuisong.news_id }}">{{ tuisong.tuisong }}</a><em class="pass">点击新闻查看</em><span>{{ tuisong.create_time }}</span>
+
+            </li>
+        {% endfor %}
+        </ul>
+         <div id="pagination" class="page"></div>
+        <script>
+            $(function(){
+                $("#pagination").pagination({
+                    currentPage: {{ data.current_page }},
+                    totalPage: {{ data.total_page }},
+                    callback: function(current) {
+                        window.location.href = '/user/news_list?p=' + current
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

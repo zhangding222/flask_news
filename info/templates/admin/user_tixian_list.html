@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新闻后台管理</title>
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+	<link rel="stylesheet" href="../../static/admin/css/jquery.pagination.css">
+	<script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../../static/admin/js/jquery.pagination.min.js"></script>
+</head>
+<body>
+	<div class="breadcrub">
+			当前位置：新闻管理>提现审核
+		</div>
+		<div class="pannel">
+			<table class="common_table">
+				<tr>
+					<th width="3%">金币</th>
+					<th width="70%">支付宝</th>
+					<th width="15%">发布时间</th>
+					<th width="5%">状态</th>
+					<th width="8%">管理操作</th>
+				</tr>
+				{% for tixian in data.tixian_list %}
+                    <tr>
+                        <td>{{ tixian.tixian }}</td>
+                        <td class="tleft">{{ tixian.zhifubao }}</td>
+                        <td>{{ tixian.create_time }}</td>
+                        <td>{% if tixian.status == 0 %}
+                            已通过
+                            {% elif tixian.status == -1 %}
+                            未通过
+                            {% else %}
+                            未审核
+                        {% endif %}</td>
+                        <td>
+						{% if tixian.status == 0 %}
+						---
+						{% elif tixian.status == -1 %}
+						---
+						{% else %}
+                            <a href="{{ url_for('admin.tixian_tongguo') }}?key={{ tixian.id }}" class="review">通过</a>
+							---------
+                          <a href="{{ url_for('admin.tixian_jujue') }}?key={{ tixian.id }}&key1={{ tixian.id }}&key2={{ tixian.tixian }}" class="edit">拒绝</a>
+						  {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+			</table>
+		</div>
+
+		<div class="box">
+			<div id="pagination" class="page"></div>
+		</div>
+
+        <script>
+            $(function() {
+                $("#pagination").pagination({
+                    currentPage: {{ data.current_page }},
+                    totalPage: {{ data.total_page }},
+                    callback: function(current) {
+                        window.location = '/admin/news_review?p=' + current
+                    }
+                });
+            });
+        </script>
+
+	
+</body>
+</html>

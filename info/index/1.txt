@@ -1,0 +1,22 @@
+config.py ： 各种配置
+
+templates/: html文件，前端模板
+
+static/: css样式，js，图片等文件
+
+admin/:后台主要逻辑（add_category()增加分类，get_news_category()获取分类，delete_category()删除分类， delete(news_id)删除新闻，def news_edit_detail()编辑新闻，def news_edit()编辑新闻列表，news_review_detail()新闻审核，news_review()审核列表，user_list()用户列表，user_count()统计人数，admin_login()管理员验证，tixian_list（）提现列表，tixian_tongguo()提现通过，tixian_jujue()提现拒绝）
+
+index/:首页主要逻辑，查看新闻
+
+lib/：发送短信用的接口，现在用不到
+
+models.py：定义模型（新闻，用户等模型，class User 即user的模型）
+
+news/:新闻相关逻辑（followed_user()关注作者，set_comment_like()评论点赞，add_news_comment()添加评论，news_dashang()新闻打赏，news_collect()新闻收藏，news_detail(news_id)查看具体新闻）
+
+passport/:注册登录逻辑（get_image_code生成图片验证码，send_sms发短信接口不用，改为显示随机6位数，register注册，login()登录，logout()退出）
+
+user/:用户主要逻辑（submitImage上传图片，user_follow用户关注，get_user_info()登录返回首页，user_info基本信息显示，base_info()信息修改，pic_info上传头像，pass_info修改密码，user_collection新闻收藏，news_release()新闻发布，news_list()新闻列表，news_list1()查看粉丝关注的人的新闻列表，fans1()粉丝，tixian()申请提现，tixian_list()提现列表，tuisong_list推送）
+utils/: captcha 生成登录验证码
+
+改前端主要就是从 temlates里面改html和static里面改css

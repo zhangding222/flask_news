@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>提现</title>
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
+        <script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/news/js/user_pass_info.js"></script>
+</head>
+<body class="inframe_body">
+
+	<form action="{{url_for('profile.tixian')}}"  method="post"  >
+        <div class="form-group">
+		
+            <label>当前金币：{{ data.user_info.money }}</label> </div>
+			<div class="form-group">
+			<label>提现金额（1:1）：</label>
+            <input type="number" min="1" max="{{ data.user_info.money }}" id="signature" name="tixian" class="input_txt" value="" required="required">
+			</div>
+			<div class="form-group">
+			<label>支付宝账号：</label>
+			<input type="text" id="signature1" name="zhifubao" class="input_txt" value="">
+			</div>
+            <input type="submit" value="提 现" class="input_sub">
+        </div>
+		</form> 
+</body>
+</html>
